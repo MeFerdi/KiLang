@@ -139,20 +139,20 @@ func (lex *Lexer) NextToken() Token {
 	return tok
 }
 func (lex *Lexer) lookupIdent(ident string) TokenType {
-    keywords := map[string]TokenType{
-        "fn":     FUNCTION,
-        "true":   TRUE,
-        "false":  FALSE,
-        "if":     IF,
-        "else":   ELSE,
-        "return": RETURN,
-        "null":   NULL,
-    }
+	keywords := map[string]TokenType{
+		"fn":     FUNCTION,
+		"true":   TRUE,
+		"false":  FALSE,
+		"if":     IF,
+		"else":   ELSE,
+		"return": RETURN,
+		"null":   NULL,
+	}
 
-    if tok, ok := keywords[ident]; ok {
-        return tok
-    }
-    return IDENT
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
 }
 func (lex *Lexer) readNumber() string {
 	position := lex.position
