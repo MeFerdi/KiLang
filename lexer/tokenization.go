@@ -8,7 +8,7 @@ type Lexer struct {
 }
 
 //initializes the lexer with the input string and sets the initial state.
-func NewLexer(input string) *Lexer { //instance 
+func NewLexer(input string) *Lexer { //instance
 	lex := &Lexer{input: input}
 	lex.readChar() // It calls readChar to load the first character into ch.
 	return lex
