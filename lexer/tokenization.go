@@ -8,7 +8,7 @@ type Lexer struct {
 }
 
 //initializes the lexer with the input string and sets the initial state.
-func NewLexer(input string) *Lexer {
+func NewLexer(input string) *Lexer { //instance 
 	lex := &Lexer{input: input}
 	lex.readChar() // It calls readChar to load the first character into ch.
 	return lex
@@ -46,7 +46,7 @@ func (lex *Lexer) readIdentifier() string {
 	return lex.input[position:lex.position]
 }
 
-func newToken(tokenType TokenType, ch byte) Token {
+func newToken(tokenType TokenType, ch byte) Token { //core method
 	return Token{Type: tokenType, Literal: string(ch)}
 }
 
