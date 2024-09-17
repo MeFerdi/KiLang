@@ -2,10 +2,18 @@ package main
 
 import (
 	"fmt"
-	"ksm/lexer"
+	"ksm/repl"
+	"os"
+	"os/user"
 )
 
 func main() {
-	lex := lexer.NewLexer("hello")
-	fmt.Printf("lexer: %v\n", lex)
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Hello %s! This is the Kisumu programming language!\n",
+		user.Username)
+	fmt.Printf("Feel free to type in commands\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
