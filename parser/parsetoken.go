@@ -1,6 +1,8 @@
 package parser
 
-import "ksm/lexer"
+import (
+	lexer "ksm/Lexer"
+)
 
 type Parser struct {
 	l            *lexer.Lexer
