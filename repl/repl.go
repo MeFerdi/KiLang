@@ -7,23 +7,23 @@ import (
 	lexer "ksm/Lexer"
 )
 
-const PROMT = ">>"
+const Type = ">>"
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 
 	for {
-		fmt.Println(PROMT)
-		scanned := scanner.Scan()
-		if !scanned {
+		fmt.Println(Type)
+		inputText := scanner.Scan()
+		if !inputText {
 			return
 		}
 		line := scanner.Text()
 
-		lex := lexer.NewLexer(line)
+		lex := lexer.NewLexer(line) //creates lexer objects by breaking the users inmput into serirs of tokens
 
-		for tnk := lex.NextToken(); tnk.Type != lexer.EOF; tnk = lex.NextToken() { // Use lexer.EOF to check for end of file
-			fmt.Fprintf(out, "%+v\n", tnk) // Use fmt.Fprintf to write to the provided output stream
+		for tnk := lex.NextToken(); tnk.Type != lexer.EOF; tnk = lex.NextToken() { //the loop get tokens one by one using len.nextToken() and runs until it reaches EOF
+			fmt.Fprintf(out, "%+v\n", tnk) //"%+v" format is used to show the detailed information about the token, including its type and value
 		}
 	}
 }
