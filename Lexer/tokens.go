@@ -18,25 +18,28 @@ const (
 	SIGNED_INT TokenType = "SIGNED_INT"
 
 	// Operators
-	ASSIGN       TokenType = "="
-	PLUS         TokenType = "+"
-	MINUS        TokenType = "-"
-	BANG         TokenType = "!"
-	ASTERISK     TokenType = "*"
-	SLASH        TokenType = "/"
-	LESS         TokenType = "<"
-	LESS_EQUAL   TokenType = "<="
-	GREAT        TokenType = ">"
-	GREAT_EQUALS TokenType = ">="
-	AND          TokenType = "&"
+	ASSIGN      TokenType = "ASSIGN"
+	PLUS        TokenType = "PLUS"
+	MINUS       TokenType = "MINUS"
+	BANG        TokenType = "BANG"
+	ASTERISK    TokenType = "ASTERIK"
+	SLASH       TokenType = "SLASH"
+	LESS        TokenType = "LESS"
+	LESS_EQUAL  TokenType = "LESS_EQUAL"
+	GREAT       TokenType = "GREAT"
+	GREAT_EQUAL TokenType = "GREAT_EQUAL"
+	AND         TokenType = "AND"
 
 	// Delimiters
-	COMMA     TokenType = ","
-	SEMICOLON TokenType = ";"
-	LPAREN    TokenType = "("
-	RPAREN    TokenType = ")"
-	LBRACE    TokenType = "{"
-	RBRACE    TokenType = "}"
+	COMMA        TokenType = "COMMA"
+	SEMICOLON    TokenType = "SEMICOLON"
+	LPAREN       TokenType = "LPAREN"
+	RPAREN       TokenType = "RPAREN"
+	LBRACE       TokenType = "LBRACE"
+	RBRACE       TokenType = "RBRACE"
+	PERIOD       TokenType = "PERIOD"
+	LSQUAREBRACE TokenType = "LSQUAREBRACE"
+	RSQUAREBRACE TokenType = "RSQUAREBRACE"
 
 	// Keywords
 	FUNCTION TokenType = "FUNCTION"
@@ -99,8 +102,8 @@ func TokenTypeString(types TokenType) string {
 		return "less_equal"
 	case GREAT:
 		return "great"
-	case GREAT_EQUALS:
-		return "great_equals"
+	case GREAT_EQUAL:
+		return "great_equal"
 	case AND:
 		return "and"
 	case COMMA:
@@ -125,17 +128,15 @@ func TokenTypeString(types TokenType) string {
 		return "false"
 	case RETURN:
 		return "return"
+	case LSQUAREBRACE:
+		return "lsquarebrace"
+	case RSQUAREBRACE:
+		return "rsquarebrace"
+	case PERIOD:
+		return "period"
 	case NULL:
 		return "null"
 	default:
 		return string(types)
 	}
 }
-
-// // newToken is a constructor for creating a new Token.
-// func newToken(types TokenType, literal string) Token {
-// 	return Token{
-// 		Type:    types,
-// 		Literal: literal,
-// 	}
-// }
