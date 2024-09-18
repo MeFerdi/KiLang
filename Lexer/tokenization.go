@@ -100,7 +100,7 @@ func (lex *Lexer) NextToken() Token {
 		if lex.peekChar() == '=' {
 			ch := lex.ch
 			lex.readChar()
-			tok = Token{Type: GREAT_EQUALS, Literal: string(ch) + string(lex.ch)}
+			tok = Token{Type: GREAT_EQUAL, Literal: string(ch) + string(lex.ch)}
 		} else {
 			tok = newToken(GREAT, lex.ch)
 		}
@@ -121,6 +121,12 @@ func (lex *Lexer) NextToken() Token {
 	case 0:
 		tok.Literal = ""
 		tok.Type = EOF
+	case '[':
+		tok = newToken(LSQUAREBRACE, lex.ch)
+	case ']':
+		tok = newToken(RSQUAREBRACE, lex.ch)
+	case '.':
+		tok = newToken(PERIOD, lex.ch)
 	default:
 		if isLetter(lex.ch) {
 			tok.Literal = lex.readIdentifier()
@@ -175,7 +181,7 @@ func (lex *Lexer) readFloat(startPosition int) string {
 
 func (lex *Lexer) lookupIdent(ident string) TokenType {
 	keywords := map[string]TokenType{
-		"fn":     FUNCTION,
+		"func":     FUNCTION,
 		"true":   TRUE,
 		"false":  FALSE,
 		"if":     IF,
