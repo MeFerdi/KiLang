@@ -11,9 +11,11 @@ const (
 	EOF     TokenType = "EOF"
 
 	// Identifiers + literals
-	IDENT  TokenType = "IDENT"
-	INT    TokenType = "INT"
-	STRING TokenType = "STRING"
+	IDENT      TokenType = "IDENT"
+	INT        TokenType = "INT"
+	STRING     TokenType = "STRING"
+	FLOAT      TokenType = "FLOAT"
+	SIGNED_INT TokenType = "SIGNED_INT"
 
 	// Operators
 	ASSIGN       TokenType = "="

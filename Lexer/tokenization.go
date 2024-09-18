@@ -7,7 +7,7 @@ type Lexer struct {
 	ch                  byte   // current character to be tokenized
 }
 
-//initializes the lexer with the input string and sets the initial state.
+// initializes the lexer with the input string and sets the initial state.
 func NewLexer(input string) *Lexer { //instance
 	lex := &Lexer{input: input}
 	lex.readChar() // It calls readChar to load the first character into ch.
@@ -126,9 +126,14 @@ func (lex *Lexer) NextToken() Token {
 			tok.Literal = lex.readIdentifier()
 			tok.Type = lex.lookupIdent(tok.Literal)
 			return tok
-		} else if isDigit(lex.ch) {
-			tok.Type = INT
-			tok.Literal = lex.readNumber()
+		} else if isDigit(lex.ch) || (lex.ch == '-' || lex.ch == '+') {
+			if lex.peekChar() == '.' {
+				tok.Type = FLOAT
+				tok.Literal = lex.readFloat(lex.position)
+			} else {
+				tok.Type = SIGNED_INT
+				tok.Literal = lex.readNumber()
+			}
 			return tok
 		} else {
 			tok = newToken(ILLEGAL, lex.ch)
@@ -138,6 +143,36 @@ func (lex *Lexer) NextToken() Token {
 	lex.readChar()
 	return tok
 }
+func (lex *Lexer) readNumber() string {
+	position := lex.position
+
+	if lex.ch == '-' || lex.ch == '+' { // Check for optional sign
+		lex.readChar() // consume the sign
+	}
+
+	for isDigit(lex.ch) {
+		lex.readChar()
+	}
+
+	return lex.input[position:lex.position]
+}
+
+// New function to read floating-point numbers
+func (lex *Lexer) readFloat(startPosition int) string {
+	position := startPosition
+	// Consume the decimal point.
+	if lex.ch == '.' {
+		lex.readChar()
+	}
+
+	// Read digits after the decimal point.
+	for isDigit(lex.ch) {
+		lex.readChar()
+	}
+
+	return lex.input[position:lex.position]
+}
+
 func (lex *Lexer) lookupIdent(ident string) TokenType {
 	keywords := map[string]TokenType{
 		"fn":     FUNCTION,
@@ -153,11 +188,4 @@ func (lex *Lexer) lookupIdent(ident string) TokenType {
 		return tok
 	}
 	return IDENT
-}
-func (lex *Lexer) readNumber() string {
-	position := lex.position
-	for isDigit(lex.ch) {
-		lex.readChar()
-	}
-	return lex.input[position:lex.position]
 }
