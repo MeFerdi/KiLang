@@ -50,7 +50,6 @@ func (p *Parser) parseStatement() ast.Statement {
 	case lexer.RETURN:
 		return p.parseReturnStatement()
 	default:
-		// Handle other cases or errors
 		return nil
 	}
 }
@@ -72,7 +71,6 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 	return statement
 }
 
-// ParseExpression parses expressions like integers, operations, etc.
 func (p *Parser) parseExpression() ast.Expression {
 	switch p.currentToken.Type {
 	case lexer.INT:
@@ -80,17 +78,15 @@ func (p *Parser) parseExpression() ast.Expression {
 	case lexer.PLUS:
 		return p.parseOperatorExpression()
 	default:
-		// Handle other expression types
 		return nil
 	}
 }
 
-// Helper function to parse identifiers
 func (p *Parser) parseIdentifier() *ast.Identifiers {
 	return &ast.Identifiers{Token: p.currentToken, Value: p.currentToken.Literal}
 }
 
-// ParseOperatorExpression handles operations like 1 + 2
+
 func (p *Parser) parseOperatorExpression() ast.Expression {
 	expression := &ast.OperatorExpression{
 		Left:     p.parseIntegerLiteral(),
@@ -107,7 +103,6 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 
 	stmt.ReturnValue = p.parseExpression()
 
-	// We expect a semicolon after the return value
 	if p.peekTokenIs(lexer.SEMICOLON) {
 		p.NextToken()
 	}
