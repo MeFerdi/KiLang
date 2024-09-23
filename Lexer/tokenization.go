@@ -143,7 +143,7 @@ func (lex *Lexer) NextToken() Token {
 			tok.Literal = lex.readIdentifier()
 			tok.Type = lex.lookupIdent(tok.Literal)
 			return tok
-		} else if isDigit(lex.ch) || (lex.ch == '-' || lex.ch == '+') {
+		} else if isDigit(lex.ch) {
 			if lex.peekChar() == '.' || strings.ContainsAny(string(lex.ch), "eE") {
 				tok.Type = FLOAT
 				tok.Literal = lex.readFloat()
