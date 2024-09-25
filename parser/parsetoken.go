@@ -1,4 +1,4 @@
-package lexer
+package parser
 
 import (
 	ast "ksm/Ast"
@@ -15,7 +15,7 @@ type Parser struct {
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{l: l} //instanct of passer is creaded to bind lexer to parser to enable parser fetch token from lexer
 
-	p.NextToken() //newtoken is called twise to be porpulate currenttoken and peek token
+	p.NextToken() //newtoken is called twice to be populate currenttoken and peek token
 	p.NextToken() //ensures parser always has 2 tokens, the current one its processing and the next one for lookahead
 
 	return p
@@ -86,7 +86,6 @@ func (p *Parser) parseIdentifier() *ast.Identifiers {
 	return &ast.Identifiers{Token: p.currentToken, Value: p.currentToken.Literal}
 }
 
-
 func (p *Parser) parseOperatorExpression() ast.Expression {
 	expression := &ast.OperatorExpression{
 		Left:     p.parseIntegerLiteral(),
@@ -97,7 +96,7 @@ func (p *Parser) parseOperatorExpression() ast.Expression {
 	return expression
 }
 func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
-	stmt := &ast.ReturnStatement{Token: p.currentToken} 
+	stmt := &ast.ReturnStatement{Token: p.currentToken}
 
 	p.NextToken()
 
