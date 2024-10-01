@@ -42,6 +42,7 @@ const (
 	RSQUAREBRACE TokenType = "RSQUAREBRACE"
 
 	// Keywords
+	LET      TokenType = "LET"
 	FUNCTION TokenType = "FUNCTION"
 	TRUE     TokenType = "TRUE"
 	FALSE    TokenType = "FALSE"

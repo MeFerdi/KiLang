@@ -206,6 +206,7 @@ func (lex *Lexer) readFloat() string {
 
 func (lex *Lexer) lookupIdent(ident string) TokenType {
 	keywords := map[string]TokenType{
+		"let":    LET,
 		"func":   FUNCTION,
 		"true":   TRUE,
 		"false":  FALSE,
